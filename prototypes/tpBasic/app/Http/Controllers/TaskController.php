@@ -62,6 +62,7 @@ class TaskController extends Controller
     public function edit($id)
     {
         //
+        
     }
 
     /**
@@ -75,7 +76,8 @@ class TaskController extends Controller
     {
         //
         $task = Task::findOrFail($id);
-        return $task->update($request->all());
+        $task->update($request->all());
+        return $task;
     }
 
     /**
