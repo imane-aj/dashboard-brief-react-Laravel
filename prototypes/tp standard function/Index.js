@@ -15,8 +15,6 @@ function Index(){
           console.log('done');
       })
     }
-
-
     return (
       <div className="container">
       <div className='row justify-content-center'>
