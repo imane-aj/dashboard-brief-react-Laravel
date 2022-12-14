@@ -1,10 +1,10 @@
 import './App.css';
-import  Get from './components/Get';
+import GetData from './components/GetData';
 
 function App() {
   return (
     <div className="App">
-     <Get />
+      <GetData />
     </div>
   );
 }

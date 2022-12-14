@@ -41,9 +41,10 @@
             axios.post('http://localhost:8000/api/task',{
                   name:this.state.task
                 })
-            .then((res)=>{
-              window.location.reload(false)
-            } )
+            .then((res=>{
+              this.getData()
+              this.state.task =""
+            } ))
           }
           getData = async () => {
               await axios.get('http://localhost:8000/api/task')
@@ -72,7 +73,7 @@
                   <div className='hero'>
                   <form action="" method="POST">
                         <div className="input-group mb-3">
-                          <input type="text" className="form-control" name="task" onChange={this.changeData}/>
+                          <input type="text" className="form-control" name="task" value={this.state.task} onChange={this.changeData}/>
                           <input type="submit" className="add"  value="submit" name="submit" onClick={this.addData}/>
                         </div>
                     </form>
