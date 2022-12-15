@@ -6,7 +6,8 @@ export default class GetData extends Component {
     super(props);
     this.state = {
       tasks: [],
-      task : ''
+      task : '',
+      id : ''
     };
   }
 
@@ -21,7 +22,8 @@ export default class GetData extends Component {
     axios.post('http://localhost:8000/api/task',{
         name: this.state.task
     }).then((res) =>{
-        window.location.reload(false)
+      this.getData()
+      this.state.task=''
     })
   }
 
@@ -42,12 +44,35 @@ export default class GetData extends Component {
     });
   };
 
+  editData = (id) =>{
+    axios.get(`http://localhost:8000/api/task/${id}/edit`).then((res =>{
+      this.setState({
+        task: res.data.name,
+         id: res.data.id
+        })
+    }))
+    console.log(this.state)
+  }
+
+  updateData = (e) =>{
+    e.preventDefault()
+    let id = this.state.id
+    axios.put('http://localhost:8000/api/task/'+id,{
+      name : this.state.task
+    })
+    .then((res => {
+      this.getData()
+      this.state.task=''
+    }))
+  }
+
   render() {
     return (
       <div>
         <form method="post">
-            <input type='text' onChange={this.changeData}/>
+            <input type='text' onChange={this.changeData} value={this.state.task}/>
             <button onClick={this.addData}>Add Task</button>
+            <button onClick={this.updateData}>Update</button>
         </form>
         <table className="table table-danger">
           <thead>
@@ -64,6 +89,7 @@ export default class GetData extends Component {
                   <button onClick={() => this.deleteData(task.id)}>
                     Delete
                   </button>
+                  <button onClick={()=> this.editData(task.id)}>Edit</button>
                 </td>
               </tr>
             ))}

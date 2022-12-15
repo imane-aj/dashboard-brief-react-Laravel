@@ -51,10 +51,13 @@ class TaskController extends Controller
      */
     public function show($id)
     {
-        //
-        return Task::findOrFail($id);
+        
+        $task = Task::find($id);
+        // dd($task);
+        return $task;   
+       
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -63,10 +66,14 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
-        //
         
+        
+        $task = Task::find($id);
+        // dd($task);
+        return $task;   
+       
     }
-
+    
     /**
      * Update the specified resource in storage.
      *
