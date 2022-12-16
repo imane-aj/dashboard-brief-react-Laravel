@@ -1,59 +1,35 @@
 import React, { Component } from "react";
-import axios from "axios";
-import Taskmanagmnt from "./Taskmanagmnt";
 
 export default class Task extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-        name : '',
-        data : []
-    }
-  }
+ constructor(props){
+  super(props)
+  // this.delete = this.delete.bind(this);
+ }
 
-  // Add data
-  changeInput = (e)=>{
-    this.setState({
-        name : e.target.value
-    })
-  }
-  addData = (e)=>{
-    e.preventDefault()
-    axios.post('http://localhost:8000/api/task',this.state)
-    .then((res =>{
-      this.getData()
-      this.state.name =''
-    }))
-  }
-
-  // Getting data
-  getData = ()=>{
-    axios.get('http://localhost:8000/api/task')
-    .then((res => {
-      this.setState({
-        data: res.data
-      })
-    }))
-  }
-  componentDidMount(){
-    this.getData()
-  }
-
-  //delet data
-  delete = (id)=>{
-    axios.delete(`http://localhost:8000/api/task/${id}`)
-    .then((res =>{
-      this.getData()
-    }))
-  }
   render() {
     return (
       <div className="mt-5">
-        <form method="post">
-            <input type='text' onChange={this.changeInput} className="form-control" placeholder="Add task"/>
-            <button className="btn btn-primary mt-2" onClick={this.addData}>Add Task</button>
-        </form>
-        <Taskmanagmnt data={this.state.data} />
+        <table className="table mt-5">
+          <thead>
+            <tr>
+              <th scope="col">Task</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.data.map((task) => (
+              <tr>
+                <td>{task.name}</td>
+                <td>
+                  <button className="btn btn-danger" onClick={()=>this.props.delete(task.id)}>
+                    Delete
+                  </button>
+                  <button className="btn btn-warning" onClick={()=>this.props.edit(task.id)}>Edit</button>
+                </td>
+              </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     );
   }
