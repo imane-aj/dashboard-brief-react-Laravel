@@ -1,11 +1,11 @@
 import './App.css';
-import AddData from './components/AddData';
+import Task from './components/Task';
 
 function App() {
  
   return (
     <div className="container App">
-      <AddData />
+      <Task />
     </div>
   );
 }

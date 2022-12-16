@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import axios from "axios";
-import GetData from "./GetData";
+import Taskmanagmnt from "./Taskmanagmnt";
 
-export default class AddData extends Component {
+export default class Task extends Component {
   constructor(props) {
     super(props);
     this.state = {
         name : '',
-        getData : []
+        data : []
     }
   }
 
+  // Add data
   changeInput = (e)=>{
     this.setState({
         name : e.target.value
@@ -20,10 +21,31 @@ export default class AddData extends Component {
     e.preventDefault()
     axios.post('http://localhost:8000/api/task',this.state)
     .then((res =>{
-        console.log(res)
+      this.getData()
+      this.state.name =''
     }))
   }
-  
+
+  // Getting data
+  getData = ()=>{
+    axios.get('http://localhost:8000/api/task')
+    .then((res => {
+      this.setState({
+        data: res.data
+      })
+    }))
+  }
+  componentDidMount(){
+    this.getData()
+  }
+
+  //delet data
+  delete = (id)=>{
+    axios.delete(`http://localhost:8000/api/task/${id}`)
+    .then((res =>{
+      this.getData()
+    }))
+  }
   render() {
     return (
       <div className="mt-5">
@@ -31,7 +53,7 @@ export default class AddData extends Component {
             <input type='text' onChange={this.changeInput} className="form-control" placeholder="Add task"/>
             <button className="btn btn-primary mt-2" onClick={this.addData}>Add Task</button>
         </form>
-        <GetData data={this.state.getData} />
+        <Taskmanagmnt data={this.state.data} />
       </div>
     );
   }

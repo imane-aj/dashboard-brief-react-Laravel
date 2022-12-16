@@ -1,21 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-export default class GetData extends Component {
-  getData = ()=>{
-    axios.get('http://localhost:8000/api/task')
-    .then((res => {
-      let data =this.props.data
-      this.setState({
-        
-      })
-    }))
-  }
-
-  componentDidMount(){
-    this.getData()
-  }
-
+export default class Taskmanagmnt extends Component {
+ constructor(props){
+  super(props)
+ }
 
   render() {
     return (
@@ -28,7 +17,7 @@ export default class GetData extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.getData.map((task) => (
+            {this.props.data.map((task) => (
               <tr>
                 <td>{task.name}</td>
                 <td>
@@ -38,7 +27,7 @@ export default class GetData extends Component {
                   <button className="btn btn-warning">Edit</button>
                 </td>
               </tr>
-             ))} 
+              ))}
           </tbody>
         </table>
       </div>
