@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('desc');
-            $table->decimal("Duree");
+            $table->string("Duree");
             $table->bigInteger('preparation_brief_id')->unsigned();
             $table->foreign('preparation_brief_id')->references('id')->on('preparation_briefs')->onDelete('cascade');
             $table->timestamps();

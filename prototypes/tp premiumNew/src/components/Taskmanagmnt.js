@@ -8,7 +8,7 @@ export default class Taskmanagmnt extends Component {
     this.state = {
         name : '',
         data : [],
-        id: ''
+        id: '',
     }
   }
 
@@ -69,6 +69,9 @@ export default class Taskmanagmnt extends Component {
       this.state.name =''
     }))
   }
+
+ 
+
   render() {
     return (
       <div className="mt-5">

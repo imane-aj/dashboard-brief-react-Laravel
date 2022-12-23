@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('state')->default('on pause');
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
+            
             $table->bigInteger('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
             $table->bigInteger('student_brief_id')->unsigned();
