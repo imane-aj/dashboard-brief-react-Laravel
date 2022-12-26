@@ -2,24 +2,33 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 export default class Header extends Component {
-
-    state = {
-        years : [],
-        value : '',
-        goups: [],
-        inputValue : ''
+    constructor(props) {
+        super(props)
+        this.state = {
+            years : [],
+            value : '',
+            goups: [],
+            selectedGroupt : ''
+        }
     }
 
     changeData = (e)=>{
-        // console.log(e.target.value)
-        this.setState({
-            value : e.target.value
-        })
+        let selected_group = {}
+        let groups = this.state.groups
+        let year_id = e.target.value
+        for (var i in groups) {
+            let group = groups[i]
+            if (year_id == group.formation_id) {
+                selected_group = groups[i]
+                this.setState({
+                    selectedGroupt : selected_group
+                })
+            } 
+        }
     }
     getData = ()=>{
         axios.get('http://localhost:8000/api/group')
         .then((res=>{
-            // console.log(res.data.years)
             this.setState({
                 years : res.data.years,
                 groups : res.data.groups
@@ -33,14 +42,20 @@ export default class Header extends Component {
     }
   render() {
     return (
-      <div>
+      <div className='row'>
+        <div className='col-md-8'>
+            <h1>tableau de borde d'état d'avancement</h1>
+        </div>
+        <div className='col-md-4 selectY'>
+            <select onChange={this.changeData} placeholder='année' id='input'>
+            {this.state.years.map((item=>
+                <option value={item.id}>{item.formation_year}</option>
+            ))}
+            </select>
+        </div>
+       
 
-        <select onChange={this.changeData} placeholder='année' id='input' value={this.state.value}>
-        {this.state.years.map((item=>
-            <option value={item.formation_year}>{item.formation_year}</option>
-        ))}
-        </select>
-
+        {/* <p>{this.state.selectedGroupt.id}</p> */}
       </div>
     )
   }

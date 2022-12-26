@@ -1,0 +1,15 @@
+.container{
+    margin-top: 6em;
+}
+h1{
+    color: blue;
+    font-weight: 300;
+}
+.selectY{
+    text-align: end;
+}
+select{
+    border-color: blue;
+    padding: 7px 28px;
+    margin-top: 0.7em;
+}
