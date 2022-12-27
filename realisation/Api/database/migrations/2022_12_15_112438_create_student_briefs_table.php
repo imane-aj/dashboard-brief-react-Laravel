@@ -18,8 +18,8 @@ return new class extends Migration
             $table->timestamp('affectation_date')->nullable();
             $table->bigInteger('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-            $table->bigInteger('group_id')->unsigned();
-            $table->foreign('group_id')->references('id')->on('groups')->onDelete('cascade');
+            $table->bigInteger('preparation_brief_id')->unsigned();
+            $table->foreign('preparation_brief_id')->references('id')->on('preparation_briefs')->onDelete('cascade');
             $table->timestamps();
         });
     }

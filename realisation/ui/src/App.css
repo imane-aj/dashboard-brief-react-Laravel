@@ -13,3 +13,11 @@ select{
     padding: 7px 28px;
     margin-top: 0.7em;
 }
+img{
+    border: 1px solid blue;
+    border-radius: 50px;
+    padding: 18px 6px;
+}
+span{
+    margin-left: 1em;
+}
