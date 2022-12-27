@@ -22,4 +22,8 @@ class DashboardController extends Controller
             'students' => $group_student
         ];
     }
+
+    public function student(){
+        
+    }
 }

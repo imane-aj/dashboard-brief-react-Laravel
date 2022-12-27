@@ -29,16 +29,17 @@ export default class Header extends Component {
             }
         }
         
+        let arr = []
         for (var i in students) {
             let student = students[i]
-            let arr = []
             if(selected_group.id == student.group_id){
-                student_Count = students[i]
-                console.log(student_Count)
-                // console.log(Object.keys(student_Count).length)
+                arr.push(student_Count)
             }
         }
-       
+        this.setState({
+            studentCount : arr.length
+        })
+        // console.log(arr.length)
     }
     getData = ()=>{
         axios.get('http://localhost:8000/api/group')
@@ -70,12 +71,14 @@ export default class Header extends Component {
             </select>
         </div>
        
-        <div className='row'>
+        <div className='row info'>
                 <div className='col-md-4'>
                     <img src='' alt='logo'></img>
                     <span>{this.state.selectedGroupt.name}</span>
                 </div>
-                <div className='col-md-4'></div>
+                <div className='col-md-4 info'>
+                    <p>{this.state.studentCount} apprenants</p>
+                </div>
                 <div className='col-md-4'></div>
         </div>
         
