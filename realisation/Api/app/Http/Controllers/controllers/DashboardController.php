@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\Formation_year;
+use App\Models\Task;
 use App\Models\Group;
 use App\Models\StudentGroup;
 use Illuminate\Http\Request;
+use App\Models\Formation_year;
+use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
 {
@@ -24,6 +25,11 @@ class DashboardController extends Controller
     }
 
     public function student(){
-        
+        $task_done = Task::where('state', 'done')->get()->count();
+        $task_notYet = Task::where('state', 'onPause')->get()->count();
+        $totalTasks = Task::all()->count();
+
+        $studentAv = ($task_done-$task_notYet)/($totalTasks*100);
+        return $studentAv;
     }
 }

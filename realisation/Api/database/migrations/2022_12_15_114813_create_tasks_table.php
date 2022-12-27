@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->string('state')->default('on pause');
+            $table->string('state')->default('onPause');
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             
