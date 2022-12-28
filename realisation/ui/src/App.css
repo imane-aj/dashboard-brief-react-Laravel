@@ -24,3 +24,12 @@ span{
 .info, .info1{
     margin-top: 1em;
 }
+.etatAv{
+    margin-top: 2em;
+}
+.studentAv{
+    border: 1px solid blue;
+}
+.etatAvSt{
+    text-align: center;
+}

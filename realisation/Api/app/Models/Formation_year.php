@@ -12,6 +12,6 @@ class Formation_year extends Model
     protected $guarded = [];
 
     public function groups(){
-        $this->hasMany(Group::class);
+        return $this->hasMany(Group::class);
     }
 }
