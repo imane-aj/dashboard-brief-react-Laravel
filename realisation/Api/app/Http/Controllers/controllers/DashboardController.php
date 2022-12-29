@@ -24,13 +24,16 @@ class DashboardController extends Controller
     public function formation(Request $request, $id){
         $year = Formation_year::findOrFail($id);
         $group = Group::where('formation_id', $year->id)->first();
-        $studentCount = $group->students;
-        $kk = $studentCount->id;
+        $studentCount = $group->students->count();
+
+        $arr = $group->students->map(function($student) {
+            return $student->student_preparation_brief;
+        })->unique('id');
         return [
-            // 'year' => $year,
-            // 'group' => $group,
-            // 'studentCount' => $studentCount,
-            'kk' => $kk
+            'year' => $year,
+            'group' => $group,
+            'studentCount' => $studentCount,
+            'brief_aff' => $arr,
         ];
     }
 

@@ -11,7 +11,8 @@ export default class Header extends Component {
         years : [],
         group : '',
         studentCount : '',
-        valueSelect: ''
+        valueSelect: '',
+        brief_affs : []
         };
   }
   getDatayears = () => {
@@ -23,13 +24,12 @@ export default class Header extends Component {
   };
 
    getData = (e) => {
-    console.log(e.target.value)
     axios.get('http://localhost:8000/api/group/'+e.target.value).then((res) => {
       this.setState({
         group: res.data.group,
-        studentCount: res.data.studentCount
+        studentCount: res.data.studentCount,
+        brief_affs : res.data.brief_aff[0]
       });
-    console.log(res.data)
     });
   };
 
@@ -38,6 +38,7 @@ export default class Header extends Component {
   }
 
   render() {
+    console.log(this.state.brief_affs)
     return (
       <div>
         <div className="row">
@@ -70,7 +71,7 @@ export default class Header extends Component {
                 {/* <BriefAv data={this.state.brief_avs}/> */}
             </div>
             <div className="col-md-6 etatAvSt">
-                <StudentAv />
+                <StudentAv data={this.state.brief_affs}/>
             </div>
         </div>
       </div>
