@@ -11,12 +11,12 @@ class Group extends Model
     protected $guarded = [];
 
     public function teacher(){
-        $this->hasOne(Teacher::class);
+        return $this->hasOne(Teacher::class);
     }
     public function students(){
-        $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class, 'student_groups');
     }
     public function formation(){
-        $this->belongsTo(Formation_year::class);
+        return$this->belongsTo(Formation_year::class);
     }
 }

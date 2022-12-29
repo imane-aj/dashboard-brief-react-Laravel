@@ -11,12 +11,12 @@ class Student extends Model
     protected $guarded = [];
 
     public function groups(){
-        $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class, 'student_groups');
     }
     public function student_preparation_brief(){
-        $this->belongsToMany(Preparation_brief::class);
+        return $this->belongsToMany(Preparation_brief::class, 'student_briefs');
     }
     public function task(){
-        $this->hasMany(Task::class);
+        return $this->hasMany(Task::class);
     }
 }

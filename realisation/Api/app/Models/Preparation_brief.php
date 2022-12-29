@@ -15,7 +15,7 @@ class Preparation_brief extends Model
     }
 
     public function students(){
-        $this->belongsToMany(Student::class);
+        $this->belongsToMany(Student::class, 'student_briefs');
     }
     public function preparation_tasks(){
         $this->hasMany(Preparation_task::class);

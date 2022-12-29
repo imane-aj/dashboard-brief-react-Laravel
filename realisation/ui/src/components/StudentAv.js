@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 export class StudentAv extends Component {
     constructor(props){
@@ -7,7 +8,8 @@ export class StudentAv extends Component {
         this.state = {
             valueSelect : '',
             studentAv : [],
-            selectStudentAv : []
+            selectStudentAv : [],
+            BriefAv : []
         }
     }
     onChange = (e)=>{
@@ -15,6 +17,7 @@ export class StudentAv extends Component {
         let students = this.props.selected_students
         let studentAv = this.state.studentAv
         let studentAvArray = []
+        let BriefAv = this.state.BriefAv
         for(var i in students){
             let student = students[i]
             for(var i in studentAv){
@@ -34,9 +37,9 @@ export class StudentAv extends Component {
         axios.get('http://localhost:8000/api/studentAv')
         .then((res=>{
             this.setState({
-                studentAv : res.data
+                studentAv : res.data.arr,
+                BriefAv : res.data.arr1
             })
-            // console.log(res.data)
         }))
     }
     componentDidMount(){
@@ -56,7 +59,9 @@ export class StudentAv extends Component {
             </select>
             <div>
                 {this.state.selectStudentAv.map(item =>(
-                    <p>{item.student_name}</p>
+                    <><p>{item.student_name}</p>
+                    <ProgressBar now={item.av} label={`${item.av}%`}/>
+                    </>
                 ))}
             </div>
         </div>
