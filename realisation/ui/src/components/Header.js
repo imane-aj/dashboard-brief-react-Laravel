@@ -38,7 +38,7 @@ export default class Header extends Component {
   }
 
   render() {
-    console.log(this.state.brief_affs)
+    // console.log(this.state.brief_affs)
     return (
       <div>
         <div className="row">

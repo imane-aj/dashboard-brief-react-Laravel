@@ -22,5 +22,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::controller(DashboardController::class)->group(function(){
     Route::get('/group/{id}', 'formation');
     Route::get('/group', 'years');
-    // Route::get('/studentAv', 'studentAv');
+    Route::get('/studentAv', 'studentAv');
 });
