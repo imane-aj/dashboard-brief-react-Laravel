@@ -8,7 +8,7 @@ export class StudentAv extends Component {
         this.state = {
             valueSelect : '',
             studentAvs : [],
-            students_av : []
+            students_av : [],
         }
     }
     onChange = (e)=>{

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import StudentAv from "./StudentAv";
 import BriefAv from "./BriefAv";
+import { GroupAv } from './GroupAv';
 
 
 export default class Header extends Component {
@@ -12,7 +13,9 @@ export default class Header extends Component {
         group : '',
         studentCount : '',
         valueSelect: '',
-        brief_affs : []
+        brief_affs : [],
+        briefs_av : [],
+        group_av : ''
         };
   }
   getDatayears = () => {
@@ -28,7 +31,9 @@ export default class Header extends Component {
       this.setState({
         group: res.data.group,
         studentCount: res.data.studentCount,
-        brief_affs : res.data.brief_aff[0]
+        brief_affs : res.data.brief_aff[0],
+        briefs_av : res.data.briefs,
+        group_av : res.data.group_av
       });
     });
   };
@@ -68,7 +73,8 @@ export default class Header extends Component {
 
         <div className="row etatAv">
             <div className="col-md-6">
-                {/* <BriefAv data={this.state.brief_avs}/> */}
+                <GroupAv data={this.state.group_av}/>
+                <BriefAv data={this.state.briefs_av} />
             </div>
             <div className="col-md-6 etatAvSt">
                 <StudentAv data={this.state.brief_affs}/>

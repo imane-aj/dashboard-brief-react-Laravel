@@ -11,9 +11,9 @@ class Task extends Model
     protected $guarded = [];
 
     public function students(){
-        $this->belongsToMany(Student::class);
+        return $this->belongsToMany(Student::class);
     }
     public function student_brief(){
-        $this->belongsTo(Student_brief::class);
+        return $this->belongsTo(Student_brief::class);
     }
 }

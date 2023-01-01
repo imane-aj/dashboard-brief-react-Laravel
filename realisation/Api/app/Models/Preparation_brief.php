@@ -11,13 +11,13 @@ class Preparation_brief extends Model
     protected $guarded = [];
 
     public function teacher(){
-        $this->belongsTo(Teacher::class);
+        return $this->belongsTo(Teacher::class);
     }
 
     public function students(){
-        $this->belongsToMany(Student::class, 'student_briefs');
+        return $this->belongsToMany(Student::class, 'student_briefs');
     }
     public function preparation_tasks(){
-        $this->hasMany(Preparation_task::class);
+        return $this->hasMany(Preparation_task::class);
     }
 }

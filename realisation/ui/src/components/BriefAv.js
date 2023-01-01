@@ -9,7 +9,7 @@ export class BriefAv extends Component {
     return (
         <div>BriefAv
             <div>
-                {Array.from(new Set(this.props.data)).map(item=>(
+                {this.props.data.map(item=>(
                     <><span>{item?.brief_name}</span>
                     <ProgressBar now={item?.brief_av} label={`${item?.brief_av}%`}/>
                     </>

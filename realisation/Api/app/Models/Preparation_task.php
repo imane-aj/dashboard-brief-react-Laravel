@@ -11,6 +11,6 @@ class Preparation_task extends Model
     protected $guarded = [];
 
     public function preparation_brief(){
-        $this->belongsTo(Preparation_brief::class);
+        return $this->belongsTo(Preparation_brief::class);
     }
 }
