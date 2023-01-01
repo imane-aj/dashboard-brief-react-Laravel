@@ -42,7 +42,7 @@ export class StudentAv extends Component {
       <div>
         <h4>Etat d'avancement des apprenants</h4>
         <div className='studentAv'>
-        <select onChange={this.onChange} placeholder="Brief" id="input">
+        <select onChange={this.onChange}  placeholder="Brief" id="input">
               <option>Brief</option>
               {this.props.data.map((item) => (
                 <option value={item.id}>{item.name}</option>

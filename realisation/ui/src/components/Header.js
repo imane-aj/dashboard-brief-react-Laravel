@@ -26,6 +26,14 @@ export default class Header extends Component {
     });
   };
 
+  lastYear = () => {
+    axios.get("http://localhost:8000/api/lastY").then((res) => {
+      this.setState({
+        lastY : res.data.year
+      });
+    });
+  };
+
    getData = (e) => {
     axios.get('http://localhost:8000/api/group/'+e.target.value).then((res) => {
       this.setState({
@@ -40,6 +48,7 @@ export default class Header extends Component {
 
   componentDidMount() {
     this.getDatayears()
+    this.lastYear()
   }
 
   render() {
