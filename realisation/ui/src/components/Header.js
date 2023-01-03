@@ -63,15 +63,15 @@ export default class Header extends Component {
             <select onChange={this.getData} placeholder="année" id="input">
               <option>Année</option>
               {this.state.years.map((item) => (
-                <option value={item.id}>{item.formation_year}</option>
+                <option value={item.id}>{item.Annee_scolaire}</option>
               ))}
             </select>
           </div>
 
           <div className="row info">
             <div className="col-md-4">
-              <img src="" alt="logo"></img>
-              <span>{this.state.group.name}</span>
+              <img src={this.state.group.Logo} alt="logo"></img>
+              <span>{this.state.group.Nom_groupe}</span>
             </div>
             <div className="col-md-4 info">
               <p>{this.state.studentCount} apprenants</p>
