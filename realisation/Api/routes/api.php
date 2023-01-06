@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\controllers\DashboardController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,10 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
 Route::controller(DashboardController::class)->group(function(){
     Route::get('/group/{id}', 'formation');
     Route::get('/group', 'years');
     Route::get('/studentAv', 'studentAv');
-    Route::get('/lastY', 'lastYear');
+    // Route::get('/lastY', 'lastYear');
 });

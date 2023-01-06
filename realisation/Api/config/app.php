@@ -186,6 +186,9 @@ return [
          * Package Service Providers...
          */
 
+         // Service Provider DomPDF
+        Barryvdh\DomPDF\ServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
@@ -194,6 +197,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
 
     ],
 
@@ -208,8 +213,14 @@ return [
     |
     */
 
+    'aliases' => [
+        // Façade DomPDF
+        "PDF" => Barryvdh\DomPDF\Facade::class
+    ],
+
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];
