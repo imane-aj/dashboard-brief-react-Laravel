@@ -33,17 +33,76 @@ use Database\Factories\PreparationTacheFactory;
 class DatabaseSeeder extends Seeder
 {
   public function run (){
+      $annee = new AnneFormation([
+        'Annee_scolaire' => fake()->date('Y')
+      ]);
+      foreach ([$annee] as $i => $year) {
+        
   
-    Formateur::factory(2)->create();
-    AnneFormation::factory(2)->create();
-    Groupes::factory(2)->create();
-    Apprenant::factory(5)->create();
-    GroupesApprenant::factory(2)->create();
-    PreparationBrief::factory(4)->create();
-    PreparationTache::factory(6)->create();
-    Brief::factory(4)->create();
-    Tache::factory(6)->create();
-    GroupesPreparationBrief::factory(6)->create();
-
+        // Create new pre formateur.
+        foreach(['Fouad', 'Abdelatif'] as $f){
+          $formateur = new Formateur([
+            'Nom_formateur' => $f,
+          ]);
+        }
+        $formateur->save();
+  
+        // Create new group.
+        foreach(['1', '2'] as $f){
+          $group = new Groupes([
+            'Nom_groupe' => "Group " . $i + 1,
+            'Annee_formation_id' => $year->id,
+            'Formateur_id' => $f
+          ]);
+        }
+        $group->save();
+  
+        // Create new preparation project.
+        $preparationProject = new PreparationBrief([
+            'Nom_du_brief' => fake()->company,
+            'Formateur_id' => $formateur->id,
+            'Duree' => 86400 // 1 Day
+        ]);
+        $preparationProject->save();
+  
+        // Create new preparation tasks.
+        for ($i = 0; $i <= 5; $i++) {
+            $preparationTask = new PreparationTache([
+                'Nom_tache' => "Task $i",
+                'Preparation_brief_id' => $preparationProject->id,
+            ]);
+            $preparationTask->save();
+            $preparationTask[] = $preparationTask->id;
+        }
+  
+        // Create new students.
+        for ($i = 0; $i <= 5; $i++) {
+            $student = new Apprenant([
+                'Nom' => fake()->firstName,
+                'Prenom' => fake()->lastName,
+                'cin' => Str::random(8),
+            ]);
+            $student->save();
+  
+            // Create new relation project.
+            $project = new Brief([
+                'Preparation_brief_id' => $preparationProject->id,
+                'Apprenant_id' => $group->id,
+            ]);
+            $project->save();
+  
+            // Create new task.
+            $task = new Tache([
+                'preparation_brief_id' => $preparationProject->id,
+                'preparation_tache_id' => $preparationTask[$i],
+                'apprenant_P_brief_id' => $project->id,
+                'Apprenant_id' => $student->id,
+                'status' => 2,
+            ]);
+            $task->save();
+  
+    }
   }
+    }
+
 }
