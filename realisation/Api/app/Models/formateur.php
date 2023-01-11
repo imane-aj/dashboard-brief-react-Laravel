@@ -12,7 +12,6 @@ class Formateur extends Model
     protected $table = "formateur";
     public $timestamps= false;
     protected $fillable = [
-
         "Nom_formateur",
         "Prenom_formateur",
         "Email_formateur",
