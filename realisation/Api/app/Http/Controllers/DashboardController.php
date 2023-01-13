@@ -2,15 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AnneFormation;
-use App\Models\Apprenant;
-use App\Models\ApprenantPreparationBrief;
 use App\Models\Brief;
-use App\Models\Groupes;
-use App\Models\GroupesPreparationBrief;
-use App\Models\PreparationBrief;
 use App\Models\Tache;
+use App\Models\Groupes;
+use App\Models\Apprenant;
 use Illuminate\Http\Request;
+use App\Models\AnneFormation;
+use App\Models\PreparationBrief;
 
 class DashboardController extends Controller
 {
@@ -27,22 +25,24 @@ class DashboardController extends Controller
         $group = Groupes::where('Annee_formation_id', $year->id)->first();
         $studentCount = $group->students->count();
 
-        $brief_aff = $group->students->map(function ($student) {
-            return $student->student_preparation_brief;
-        })->unique('id');
-
         $brief_info = [];
         $students = $group->students()->get();
+
+        foreach($students as $student){
+            $b = Brief::where('Apprenant_id', $student->id)->get();
+        }
+        foreach($b as $brief){
+            $brief_aff = PreparationBrief::where('id', $brief->Preparation_brief_id)->get();
+        }
 
         $total_tasks_briefs = [];
         $total_tasksDone_briefs = [];
         foreach($students as $student){
-            $b_aff = Brief::where('Apprenant_id', $student->id)->get();
-            foreach($b_aff as $brief){
+            foreach($b as $brief){
 
-                $total_task_brief =  Tache::where('apprenant_P_brief_id', $brief->Preparation_brief_id )
+                $total_task_brief =  Tache::where('preparation_brief_id', $brief->Preparation_brief_id )
                                                 ->get()->count();
-                $total_taskDone_brief = Tache::where('apprenant_P_brief_id', $brief->Preparation_brief_id )
+                $total_taskDone_brief = Tache::where('preparation_brief_id', $brief->Preparation_brief_id )
                                                 ->where('Etat', 'terminer')
                                               ->get()->count();
                 if($total_task_brief != 0){
@@ -68,13 +68,12 @@ class DashboardController extends Controller
         }else{
             $group_av = 0;
         }
-
         return [
             'year' => $year,
             'group' => $group,
             'studentCount' => $studentCount,
             'brief_aff' => $brief_aff,
-            'briefs' => $brief_info,
+            'briefs' => collect($brief_info)->unique(),
             'group_av' => $group_av
         ];
     }
@@ -103,7 +102,6 @@ class DashboardController extends Controller
                     'brief' => $brief_id,
                     'student_id' => $student_id,
                     'brief_name' => $brief_name
-
                 ];
             }
            }
@@ -111,7 +109,6 @@ class DashboardController extends Controller
         return response()->json([
             'arr'   => $arr,
         ]);
-
     }
 
 

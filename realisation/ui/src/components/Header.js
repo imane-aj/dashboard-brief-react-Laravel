@@ -39,10 +39,11 @@ export default class Header extends Component {
       this.setState({
         group: res.data.group,
         studentCount: res.data.studentCount,
-        brief_affs : res.data.brief_aff[0],
+        brief_affs : res.data.brief_aff,
         briefs_av : res.data.briefs,
         group_av : res.data.group_av
       });
+      console.lo
     });
   };
 

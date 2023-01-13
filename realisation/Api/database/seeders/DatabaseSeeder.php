@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use App\Models\Brief;
 
+
 use App\Models\Tache;
 
 
@@ -15,22 +16,7 @@ use Illuminate\Database\Seeder;
 use App\Models\GroupesApprenant;
 use App\Models\PreparationBrief;
 use App\Models\PreparationTache;
-use Database\Factories\BriefFactory;
-use Database\Factories\TacheFactory;
-use Database\Factories\GroupesFactory;
-use App\Models\GroupesPreparationBrief;
-use Database\Factories\ApprenantFactory;
-use Database\Factories\FormateurFactory;
-use Database\Factories\AnneFormationFactory;
-use Database\Factories\GroupesApprenantFactory;
-use Database\Factories\PreparationBriefFactory;
-use Database\Factories\PreparationTacheFactory;
-use Database\Factories\GroupesPreparationBriefFactory;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
                          
-
-
 class DatabaseSeeder extends Seeder
 {
   public function run (){
@@ -51,12 +37,13 @@ class DatabaseSeeder extends Seeder
           $group = new Groupes([
             'Nom_groupe' => "Soli_group " . $i + 1,
             'Annee_formation_id' => $annee->id,
-            'Formateur_id' => $formateur->id
+            'Formateur_id' => $formateur->id,
+            'Logo' => fake()->imageUrl()
           ]);
           $group->save();
-  
+
           // Create new preparation project.
-          // for ($i = 0; $i <= 2; $i++) {
+          for ($i = 0; $i <= 1; $i++) {
             $preparationProject = new PreparationBrief([
                 'Nom_du_brief' => "Brief " . $i + 1,
                 'Formateur_id' => $formateur->id,
@@ -64,6 +51,7 @@ class DatabaseSeeder extends Seeder
             ]);
             $preparationProject->save();
             $preparationProjects[] =  $preparationProject->id;
+          }
           // }
               for ($i = 0; $i <= 5; $i++) {
                 $student = new Apprenant([
@@ -87,10 +75,10 @@ class DatabaseSeeder extends Seeder
                   $brief->save();
                   $briefs[] = $brief->id;
 
-                $preTask = new PreparationTache([
-                    'Nom_tache' => "Task " . $i + 1,
-                    'Preparation_brief_id' => $preparationProject->id,
-                ]);
+                  $preTask = new PreparationTache([
+                      'Nom_tache' => "Task " . $i + 1,
+                      'Preparation_brief_id' => $preparationProject->id,
+                  ]);
                 $preTask->save();
                 $preTasks[] = $preTask->id;
     
@@ -106,23 +94,6 @@ class DatabaseSeeder extends Seeder
                   $task->save();
               
             }
-          
-       
-          // Create new preparation tasks.
-          
-        
-                // for ($i = 0; $i <= 2; $i++) {
-                //   $input[] = array("terminer", "en pouse", "terminer");
-                //   $task = new Tache([
-                //     'preparation_brief_id' => $preparationProjects[$i],
-                //     'preparation_tache_id' => $preparationTasks[$i],
-                //     'apprenant_P_brief_id' => $briefs[$i],
-                //     'Apprenant_id' => $students[$i],
-                //     'Etat' => fake()->randomElement($input[$i]),
-                //   ]);
-                //   $task->save();
-                // }
-    
       }
     } //function run
   } //class

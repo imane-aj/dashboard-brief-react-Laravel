@@ -19,6 +19,7 @@ export class StudentAv extends Component {
             let studentAv = studentAvs[i]
             if(studentAv.brief == valueSelect){
                 studentAv = studentAvs[i]
+                console.log(studentAv)
                 students_avs.push(studentAv)
             }
         }
