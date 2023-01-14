@@ -7,10 +7,12 @@ export class GroupAv extends Component {
     }
   render() {
     return (
-      <div>GroupAv
-         <div>
-                <ProgressBar now={this.props.data} label={`${this.props.data}%`}/>
-            </div>
+
+      <div className='groupAv'>
+      <h4>Group Avancement</h4>
+          <div className='mt-4'>
+            <ProgressBar now={this.props.data} label={`${this.props.data}%`}/>
+          </div>
       </div>
     )
   }

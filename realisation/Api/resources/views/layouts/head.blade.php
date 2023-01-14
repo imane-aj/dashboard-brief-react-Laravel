@@ -33,7 +33,7 @@
 
 <!-- Theme style -->
 <link rel="stylesheet" href="{{asset('assets/css/adminlte.min.css')}}">
-<script defer="defer" src="/static/js/main.a69f8291.js"></script>
-<link href="/static/css/main.69481805.css" rel="stylesheet">
+<script defer="defer" src="/static/js/main.d71b1b3a.js"></script>
+<link href="/static/css/main.a54cf4f2.css" rel="stylesheet">
 
 

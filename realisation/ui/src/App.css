@@ -18,18 +18,17 @@ img{
     width: 100px;
     height: 100px;
 }
-span{
-    margin-left: 1em;
-}
-.info, .info1{
-    margin-top: 1em;
-}
 .etatAv{
     margin-top: 2em;
 }
-.studentAv{
+.studentAv, .groupAv, .briefAv{
     border: 1px solid blue;
+    padding: 10px 20px 20px;
 }
+.studentAv .col-md-9{
+    margin-top: 0.4em;
+}
+
 .etatAvSt{
     text-align: center;
 }

@@ -41,18 +41,18 @@ export class StudentAv extends Component {
   render() {
     return (
       <div>
-        <h4>Etat d'avancement des apprenants</h4>
         <div className='studentAv'>
+        <h4>Etat d'avancement des apprenants</h4>
             <select onChange={this.onChange}  placeholder="Brief" id="input">
               <option>Brief</option>
               {this.props.data.map((item) => (
-                <option value={item?.id}>{item?.Nom_du_brief}</option>
+                <option value={item?.brief_aff[0].id}>{item?.brief_aff[0].Nom_du_brief}</option>
               ))}
             </select>
-            <div>
+            <div className='row mt-3'>
                 {this.state.students_av.map(item =>(
-                    <><p>{item.student_name}</p>
-                    <ProgressBar now={item.av} label={`${item.av}%`}/>
+                    <><div className='col-md-3'>{item.student_name}: </div> 
+                    <div className='col-md-9'><ProgressBar now={item.av} label={`${item.av}%`}/></div>
                     </>
                 ))}
             </div>

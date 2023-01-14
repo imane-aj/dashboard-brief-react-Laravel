@@ -39,11 +39,11 @@ export default class Header extends Component {
       this.setState({
         group: res.data.group,
         studentCount: res.data.studentCount,
-        brief_affs : res.data.brief_aff,
-        briefs_av : res.data.briefs,
+        brief_affs : res.data.brief_info,
+        // briefs_av : res.data.briefs,
         group_av : res.data.group_av
       });
-      console.lo
+      console.log(res.data)
     });
   };
 
@@ -68,23 +68,25 @@ export default class Header extends Component {
               ))}
             </select>
           </div>
-
-          <div className="row info">
-            <div className="col-md-4">
+        </div>
+          <div className="row justify-content-center info">
+            <div className="col-md-2">
               <img src={this.state.group.Logo} alt="logo"></img>
-              <span>{this.state.group.Nom_groupe}</span>
             </div>
-            <div className="col-md-4 info">
+            <div className="col-md-2 mt-5">
+              <p>{this.state.group.Nom_groupe}</p>
+            </div>
+            <div className="col-md-2 mt-5">
               <p>{this.state.studentCount} apprenants</p>
             </div>
-            <div className="col-md-4"></div>
           </div>
-        </div>
 
         <div className="row etatAv">
             <div className="col-md-6">
                 <GroupAv data={this.state.group_av}/>
-                <BriefAv data={this.state.briefs_av} />
+                <BriefAv data={this.state.brief_affs} />
+                <div>
+            </div>
             </div>
             <div className="col-md-6 etatAvSt">
                 <StudentAv data={this.state.brief_affs}/>
